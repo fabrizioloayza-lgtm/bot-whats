@@ -3,6 +3,17 @@
 // Requiere: npm i @whiskeysockets/baileys qrcode-terminal pino
 // Coloca "bienvenida.jpg" junto a este archivo.
 
+// Mantener Render activo
+const http = require('http');
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bot activo ✅\n');
+}).listen(PORT, () => {
+  console.log(`🌐 Keep-alive HTTP server en puerto ${PORT}`);
+});
+// Mantener Render activo
+
 const {
   default: makeWASocket,
   useMultiFileAuthState,

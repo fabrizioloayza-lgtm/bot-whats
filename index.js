@@ -27,7 +27,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DELAY_MS = 3000; // 3s “humano”
-const WELCOME_IMG_PATH = path.join(__dirname, 'bienvenida.jpg');
+const WELCOME_IMG_PATH = path.join(__dirname, 'bienvenidas.jpg');
 const GREETED_FILE = path.join(__dirname, 'greeted.json');
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -130,8 +130,8 @@ async function start() {
         await enviarRespondiendo(
           sock, jid,
           '🎉 *¡Excelente!* Cumples los requisitos.\n' +
-          '📝 Haz clic en el siguiente enlace y completa el formulario. Por favor, recuerda llenar tus datos correctamente\n' +
-          '🚀 https://forms.gle/sRYpg8RDdqbUAQr28',
+          '📝 Haz clic en el siguiente enlace y completa el formulario. Por favor, recuerda llenar tus datos correctamente:\n' +
+          'https://forms.gle/sRYpg8RDdqbUAQr28',
           m
         );
         return;
@@ -140,7 +140,7 @@ async function start() {
         await enviarRespondiendo(
           sock, jid,
           '🙏 *Gracias por confirmar.*\n' +
-          '💡 El perfil que buscamos debe cumplir con todos los requisitos. Gracias por comunicarse con nosotros. 💬',
+          'El perfil que buscamos debe cumplir con todos los requisitos. Gracias por comunicarse con nosotros.',
           m
         );
         return;

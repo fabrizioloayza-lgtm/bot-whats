@@ -52,9 +52,11 @@ function buildRequisitosTexto() {
     '*¿Quiénes pueden inscribirse a este programa gratuito de Formación de Lecturistas?*',
     '',
     '• 👩 *Mujeres*',
+    '• 📍 *Residir en Lima o Callao*',
     '• 📆 *18 a 45 años*',
     '• 🎓 *Secundaria completa*',
-    '• 📍 *Residir en Lima o Callao*',
+    '• 📋 *No tener antecedentes penales ni policiales*',
+    '• ⏳ *Disponibilidad para asistir a las clases presenciales en Tecsup-Lima*',
     '',
     '*Confirma si cumples con los requisitos*',
     '*Responde 1 (Sí) o 2 (No)*',
@@ -206,8 +208,8 @@ async function start() {
 
     const bienvenidaTexto =
       '🙋‍♀️ *¡Bienvenidas a las inscripciones del Programa de Formación de Lecturistas para mujeres!* ✨\n' +
-      '🧠 *Dirigido a mujeres que buscan empoderarse a través del conocimiento.*\n' +
-      '🙏 ¡Gracias por ponerte en contacto! En breve te responderemos.';
+      '*Dirigido a mujeres que buscan empoderarse a través del conocimiento.*\n' +
+      '¡Gracias por ponerte en contacto! En breve te responderemos.';
 
     if (fs.existsSync(WELCOME_IMG_PATH)) {
       const buffer = fs.readFileSync(WELCOME_IMG_PATH);

@@ -29,6 +29,7 @@ const path = require('path');
 const DELAY_MS = 3000; // 3s “humano”
 const WELCOME_IMG_PATH = path.join(__dirname, 'bienvenidas.jpg');
 const GREETED_FILE = path.join(__dirname, 'greeted.json');
+const SESSION_PATH = process.env.SESSION_PATH || 'auth';
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
 // Persistencia: a quién ya saludamos
@@ -75,6 +76,31 @@ function extractText(m) {
   if (msg.videoMessage?.caption) return (msg.videoMessage.caption || '').trim();
   return '';
 }
+
+// --- Mejoras de robustez ---
+process.on('uncaughtException', (e) => console.error('UNCAUGHT', e?.message || e));
+process.on('unhandledRejection', (e) => console.error('UNHANDLED', e));
+
+// Envío seguro: no intentes enviar si WS no está OPEN
+async function safeSend(sock, jid, content, opt) {
+  try {
+    const open = sock?.ws && sock.ws.readyState === 1; // 1 = OPEN
+    if (!open) throw new Error('WS not open');
+    return await sock.sendMessage(jid, content, opt);
+  } catch (e) {
+    console.warn('⏸️ No enviado; socket no abierto. Se reintentará tras reconectar:', e.message);
+  }
+}
+
+// Backoff de reconexión
+let retries = 0;
+function restartWithBackoff(startFn) {
+  const wait = Math.min(30000, 2000 * (1 + retries++)); // hasta 30s
+  console.log(`↻ Reintentando en ${wait} ms`);
+  setTimeout(() => startFn().catch(() => {}), wait);
+}
+
+// --- Núcleo ---
 
 async function start() {
   const { state, saveCreds } = await useMultiFileAuthState('auth');

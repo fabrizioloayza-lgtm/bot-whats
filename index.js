@@ -56,7 +56,7 @@ function buildRequisitosTexto() {
     '• 📆 *18 a 45 años*',
     '• 🎓 *Secundaria completa*',
     '• 📋 *No tener antecedentes penales ni policiales*',
-    '• ⏳ *Disponibilidad para asistir a las clases presenciales en Tecsup-Lima*',
+    '• ⏳ *Disponibilidad para asistir a las clases presenciales en Tecsup-Lima durante 2 dias (Full day)*',
     '',
     '*Confirma si cumples con los requisitos*',
     '*Responde 1 (Sí) o 2 (No)*',
